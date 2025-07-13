@@ -1,0 +1,1 @@
+# plaquita-QR-Mascota
