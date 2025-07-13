@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de GR para Collar de Mascota</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f9ff;
+        }
+        
+        .pet-tag-preview {
+            background: linear-gradient(145deg, #ffffff, #e6f2ff);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        
+        .pet-tag-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .form-control {
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+        
+        .pet-avatar {
+            background: linear-gradient(135deg, #93c5fd, #3b82f6);
+        }
+        
+        .step {
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .step.completed {
+            background-color: #10b981;
+            color: white;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl">Generador de Identificación para Mascotas</h1>
+            <p class="mt-3 text-lg text-gray-600">Crea un GR personalizado para el collar de tu mascota con toda la información importante</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Formulario -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex mb-6">
+                    <div class="step w-8 h-8 rounded-full flex items-center justify-center font-bold mr-2 active">1</div>
+                    <div class="step w-8 h-8 rounded-full flex items-center justify-center font-bold mr-2">2</div>
+                    <div class="step w-8 h-8 rounded-full flex items-center justify-center font-bold">3</div>
+                </div>
+                
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Información de la Mascota</h2>
+                
+                <form id="petForm">
+                    <div class="mb-4">
+                        <label for="petName" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la Mascota *</label>
+                        <input type="text" id="petName" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="petType" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Mascota *</label>
+                        <select id="petType" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Perro">Perro</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Ave">Ave</option>
+                            <option value="Roedor">Roedor</option>
+                            <option value="Reptil">Reptil</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="breed" class="block text-sm font-medium text-gray-700 mb-1">Raza *</label>
+                        <input type="text" id="breed" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="petColor" class="block text-sm font-medium text-gray-700 mb-1">Color Principal</label>
+                        <input type="text" id="petColor" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="petBirth" class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento</label>
+                        <input type="date" id="petBirth" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="petPhoto" class="block text-sm font-medium text-gray-700 mb-1">Foto de la Mascota</label>
+                        <input type="file" id="petPhoto" accept="image/*" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    
+                    <h2 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Información del Dueño</h2>
+                    
+                    <div class="mb-4">
+                        <label for="ownerName" class="block text-sm font-medium text-gray-700 mb-1">Nombre del Dueño *</label>
+                        <input type="text" id="ownerName" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
+                        <input type="tel" id="phone" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Dirección *</label>
+                        <textarea id="address" rows="2" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="city" class="block text-sm font-medium text-gray-700 mb-1">Ciudad *</label>
+                        <input type="text" id="city" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="additionalNotes" class="block text-sm font-medium text-gray-700 mb-1">Notas Adicionales</label>
+                        <textarea id="additionalNotes" rows="2" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button type="button" id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Generar GR para Collar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Vista previa -->
+            <div class="bg-white rounded-xl shadow-lg p-6 sticky top-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Vista Previa del GR</h2>
+                
+                <div class="pet-tag-preview w-full max-w-xs mx-auto rounded-2xl p-6 mb-6 text-center">
+                    <div class="pet-avatar w-16 h-16 mx-auto rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
+                        <span id="petInitial">?</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-800" id="previewPetName">Nombre Mascota</h3>
+                    <p class="text-sm text-gray-600 mb-1" id="previewBreed">Raza</p>
+                    
+                    <div class="border-t border-gray-200 my-3"></div>
+                    
+                    <div class="text-left">
+                        <p class="text-xs font-medium text-gray-600 mb-1"><span class="font-bold">Dueño:</span> <span id="previewOwner">Nombre Dueño</span></p>
+                        <p class="text-xs font-medium text-gray-600 mb-1"><span class="font-bold">Teléfono:</span> <span id="previewPhone">---</span></p>
+                        <p class="text-xs font-medium text-gray-600 mb-1"><span class="font-bold">Dirección:</span> <span id="previewAddress">---</span></p>
+                        <div id="previewPhotoContainer" class="mb-2 hidden">
+                            <img id="previewPhoto" src="" alt="Foto de la mascota" class="w-20 h-20 object-cover rounded-full mx-auto" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2065320b-85a2-4ee7-a2e7-51252fbfbdd4.png">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 flex justify-center">
+                        <div class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full" id="previewType">Tipo: ---</div>
+                    </div>
+                    
+                    <div class="text-center mt-4" id="qrCodePreview">
+                        <img id="qrCodeImage" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data={}" alt="Código QR con información de la mascota" class="mx-auto">
+                        <p class="text-xs text-gray-500 mt-2">Escanea para ver toda la información</p>
+                    </div>
+                    
+                    <div class="text-center mt-4" id="qrCodePreview">
+                        <img id="qrCodeImage" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/643d5688-fe0a-4b9e-8ce9-2fd4e3981b2a.png" alt="Código QR con información de la mascota" class="mx-auto">
+                        <p class="text-xs text-gray-500 mt-2">Escanea para ver toda la información</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="downloadBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 opacity-0 invisible" disabled>
+                        Descargar GR
+                    </button>
+                </div>
+                
+                <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 hidden" id="qrNote">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                <span class="font-bold">Nota:</span> Para mejores resultados, imprime el GR en material resistente al agua y con una carcasa protectora.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('petForm');
+            const generateBtn = document.getElementById('generateBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const qrNote = document.getElementById('qrNote');
+            
+            // Elementos de vista previa
+            const previewPetName = document.getElementById('previewPetName');
+            const previewBreed = document.getElementById('previewBreed');
+            const previewOwner = document.getElementById('previewOwner');
+            const previewPhone = document.getElementById('previewPhone');
+            const previewAddress = document.getElementById('previewAddress');
+            const previewMicrochip = document.getElementById('previewMicrochip');
+            const previewType = document.getElementById('previewType');
+            const petInitial = document.getElementById('petInitial');
+            
+            // Handle photo preview
+            document.getElementById('petPhoto').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const preview = document.getElementById('previewPhoto');
+                        preview.src = event.target.result;
+                        document.getElementById('previewPhotoContainer').classList.remove('hidden');
+                        document.querySelector('.pet-avatar').classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Actualizar vista previa cuando se escriba en los campos
+            form.addEventListener('input', function() {
+                updatePreview();
+            });
+            
+            function updatePreview() {
+                const petName = document.getElementById('petName').value || 'Nombre Mascota';
+                const breed = document.getElementById('breed').value || 'Raza';
+                const ownerName = document.getElementById('ownerName').value || 'Nombre Dueño';
+                const phone = document.getElementById('phone').value || '---';
+                const address = document.getElementById('address').value || '---';
+                const petType = document.getElementById('petType').value || '---';
+                
+                previewPetName.textContent = petName;
+                previewBreed.textContent = breed;
+                previewOwner.textContent = ownerName;
+                previewPhone.textContent = phone;
+                previewAddress.textContent = address;
+                previewType.textContent = `Tipo: ${petType}`;
+                
+                // Update QR code preview when data changes
+                generateQRCode({
+                    name: petName,
+                    breed: breed,
+                    type: petType,
+                    owner: ownerName,
+                    phone: phone,
+                    address: address,
+                    photo: document.getElementById('petPhoto').files[0] ? document.getElementById('previewPhoto').src : null
+                });
+                
+                // Update QR code preview when data changes
+                generateQRCode({
+                    name: petName,
+                    breed: breed,
+                    type: petType,
+                    owner: ownerName,
+                    phone: phone,
+                    address: address,
+                    photo: document.getElementById('petPhoto').files[0] ? document.getElementById('previewPhoto').src : null
+                });
+                
+                // Mostrar inicial del nombre si existe
+                petInitial.textContent = petName ? petName.charAt(0).toUpperCase() : '?';
+            }
+            
+            generateBtn.addEventListener('click', function() {
+                if (form.checkValidity()) {
+                    // Validación exitosa
+                    downloadBtn.classList.remove('opacity-0', 'invisible');
+                    downloadBtn.disabled = false;
+                    qrNote.classList.remove('hidden');
+                    
+                    // Mostrar pasos completados
+                    document.querySelectorAll('.step').forEach((step, index) => {
+                        step.classList.remove('active');
+                        if (index < 2) {
+                            step.classList.add('completed');
+                        }
+                        if (index === 2) {
+                            step.classList.add('active');
+                        }
+                    });
+                    
+                    // Actualizar vista previa con datos definitivos
+                    updatePreview();
+                    
+                    // Scroll a la sección de vista previa
+                    document.querySelector('.pet-tag-preview').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Cambiar texto del botón de generación
+                    generateBtn.textContent = 'Actualizar GR';
+                    
+                } else {
+                    // Mostrar errores de validación
+                    form.reportValidity();
+                }
+            });
+            
+            // Function to generate QR code
+            function generateQRCode(data) {
+                // In a real implementation, this would call a QR code API
+                console.log("Generating QR code with data:", data);
+                document.getElementById('qrCodeImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(JSON.stringify(data))}`;
+            }
+
+            downloadBtn.addEventListener('click', function() {
+                const petData = {
+                    name: document.getElementById('petName').value,
+                    breed: document.getElementById('breed').value,
+                    type: document.getElementById('petType').value,
+                    color: document.getElementById('petColor').value,
+                    birthDate: document.getElementById('petBirth').value,
+                    owner: document.getElementById('ownerName').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    notes: document.getElementById('additionalNotes').value,
+                    photo: document.getElementById('petPhoto').files[0] ? document.getElementById('previewPhoto').src : null
+                };
+
+                // In a real implementation, this would generate a QR code with the petData JSON
+                alert('Generando GR con QR que contiene:\n' + JSON.stringify(petData, null, 2));
+                
+                console.log('Contenido para el collar:', content);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
